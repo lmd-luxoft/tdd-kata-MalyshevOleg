@@ -13,17 +13,6 @@ TEST(TDDKata, AddEmpyString) {
 	}
 
 // correction tests
-TEST(TDDKata, AddTooManyArgs) {
-		// Arrange
-		char* string = "1,2,3,4";
-		Calculator calc;
-		int res;
-		// Act
-		res = calc.Add(string);
-		// ASSERT
-		ASSERT_EQ(res, (int)Calculator::errTooManyArgs);
-	}
-// correction tests
 TEST(TDDKata, AddNotDigitArgs) {
 		// Arrange
 		char* string = "aaa";
