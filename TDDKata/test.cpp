@@ -161,14 +161,41 @@ TEST(TDDKata, AddDelimNL3) {
 	ASSERT_EQ(res, (int)Calculator::errIncorrectDelim);
 }
 
-// working tests
-TEST(TDDKata, AddDelimNL4) {
+
+// correction tests
+TEST(TDDKata, AddCorrectSpecitalDelim) {
 	// Arrange
-	char* string = "//;\n1;2//|\n3|5,6;7";
+	char* string = "//need_end";
 	Calculator calc;
 	int res;
 	// Act
 	res = calc.Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)Calculator::errEnclosedDelim);
+}
+
+/*
+// correction tests
+TEST(TDDKata, AddCorrectSpecitalDelim) {
+	// Arrange
+	char* string = "//\\n";
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, (int)Calculator::errEnclosedDelim);
+}
+*/
+
+// working tests
+TEST(TDDKata, AddDelimNL4) {
+	// Arrange
+	char* string = "//;\n1;2//|\n3|5,6,7";
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, 24);
 }
