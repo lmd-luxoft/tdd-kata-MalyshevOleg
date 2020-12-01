@@ -149,4 +149,26 @@ TEST(TDDKata, AddCorrectDelimNL) {
 	//		ASSERT_FALSE(true);
 }
 
+// correction tests
+TEST(TDDKata, AddDelimNL3) {
+	// Arrange
+	char* string = "//;\n1-2//|\n3|5,6-7";
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, (int)Calculator::errIncorrectDelim);
+}
 
+// working tests
+TEST(TDDKata, AddDelimNL4) {
+	// Arrange
+	char* string = "//;\n1;2//|\n3|5,6;7";
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, (int)Calculator::errEnclosedDelim);
+}
