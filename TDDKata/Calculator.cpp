@@ -4,17 +4,22 @@
 
 int Calculator::Add(char* expression)
 {
-    if ((expression == NULL) ||
-       (strlen(expression)==0)) return errEmpty;
+// declare vars
+    std::vector<char *> correct_delims = { ",","\n" };
 
-    std::vector<char *> args;
+    std::vector<char*> args;
 
     char* cur_tok = expression;
 
-        // parser
-
     int wait_next = -1;
-    
+
+// test 1
+    if ((expression == NULL) ||
+       (strlen(expression)==0)) return errEmpty;
+
+
+// parser
+   
 
     while (1)
     {
@@ -50,7 +55,17 @@ int Calculator::Add(char* expression)
             } // not end string
             else
             {
-                if (*cur_tok == ',') // is delim 
+                int is_ok_delim = 0;
+                for (const auto& element : correct_delims)
+                {
+                    if (strstr(cur_tok, element) == cur_tok)
+                    {
+                        is_ok_delim = 1;
+                        break;
+                    }
+                }
+
+                if (is_ok_delim) // is delim OK?s
                 {
                     wait_next++; // wait next arg
                     cur_tok++; // go next
