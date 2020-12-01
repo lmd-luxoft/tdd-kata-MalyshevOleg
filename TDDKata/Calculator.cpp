@@ -2,23 +2,24 @@
 #include "Calculator.h"
 
 
+
+
 int Calculator::Add(char* expression)
 {
+
+    int state = stateNormal;
+
 // declare vars
     std::vector<char *> correct_delims = { ",","\n" };
 
-    char *spec_delim_start = "//";
-    char* spec_delim_end = "\n";
 
     std::vector<char*> args;
 
     char* cur_tok = expression;
 
-    int wait_next_arg = -1;
+    int wait_next_arg = -INT_MAX;
 
     int in_spec_delim = 0;
-
-    char* new_delim = NULL;
 
 // test 1
     if ((expression == NULL) ||
@@ -32,50 +33,21 @@ int Calculator::Add(char* expression)
     {
 
         // check special delim
-        if (strstr(cur_tok, spec_delim_start) == cur_tok)
-        {
-            cur_tok += strlen(spec_delim_start);
-            in_spec_delim = 1;
-        }
-
-        // in special delim
-        if (in_spec_delim)
-        {
-
-            if (strstr(cur_tok, spec_delim_end) == cur_tok) // found end
-            {
-                if (new_delim == NULL) return errEnclosedDelim; // uncorrctr //\n - not found real delim
-                char tmp_str[100];
-                memset(tmp_str, 0, 100);
-                strncpy(tmp_str, new_delim, cur_tok - new_delim);
-                correct_delims.push_back(tmp_str);
-                new_delim = NULL;
-                in_spec_delim = 0;
-                cur_tok++;
-                continue;
-            }
-
-            if (new_delim == NULL) new_delim = cur_tok;
-
-            cur_tok++;
-
-            if (*cur_tok == 0)
-            {
-                // end string incorect
-                return errEnclosedDelim;
-            }
-
-            continue;
+        if (strstr(cur_tok, spec_delim_start) == cur_tok) {
+            char* new_delim = ParseSpecialDelimeters(&cur_tok);
+            if (new_delim == NULL) return errEnclosedDelim; // uncorrctr //\n - not found real delim
+            else correct_delims.push_back(new_delim);
+            wait_next_arg++;
         }
         
 
         if( isdigit(*cur_tok)) // while digit
         {
-            if (args.size() < wait_next_arg )
+            if ((int)args.size() < wait_next_arg || (args.size()==0))
                 args.push_back(cur_tok);
 
             // first time
-            if (wait_next_arg == -1) wait_next_arg = 1;
+            if (wait_next_arg < 0) wait_next_arg = 1;
 
             cur_tok++; // go next
         }
@@ -84,7 +56,7 @@ int Calculator::Add(char* expression)
             if (*cur_tok == 0) //end string
             {
                 // wait for next value but nothing
-                if (args.size()<wait_next_arg)
+                if ((int)args.size()<wait_next_arg)
                     return errEnclosedDelim;
 
                 //if(args[wait_next] == NULL)
@@ -124,4 +96,29 @@ int Calculator::Add(char* expression)
             }
         }
     }
+}
+
+char* Calculator::ParseSpecialDelimeters(char** cur_token)
+{
+    char * new_delim = NULL;
+    (*cur_token) += strlen(spec_delim_start);
+
+    while (strstr((*cur_token), spec_delim_end) != (*cur_token)) // found end
+    {
+        // do it once ^[//(a)+\n]
+        if (new_delim == NULL) new_delim = (*cur_token);
+        (*cur_token)++;
+        if (*(*cur_token) == 0) return NULL;
+    }
+
+    if (new_delim == NULL) return NULL;
+    else
+    {
+            
+            char* tmp_str = new char[((*cur_token) - new_delim) + 1](); 
+            strncpy(tmp_str, new_delim, (*cur_token) - new_delim);
+            (*cur_token)++;
+            return tmp_str;
+     }
+
 }
