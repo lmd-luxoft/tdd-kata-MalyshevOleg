@@ -4,7 +4,8 @@
 
 int Calculator::Add(char* expression)
 {
-    if (strlen(expression)==0) return errEmpty;
+    if ((expression == NULL) ||
+       (strlen(expression)==0)) return errEmpty;
 
     std::vector<char *> args;
 

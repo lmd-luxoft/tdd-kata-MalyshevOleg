@@ -55,7 +55,7 @@ TEST(TDDKata, AddUnclosedDelim) {
 
 // work normal tests
 
-TEST(TDDKata, AddNotCorrectOne) {
+TEST(TDDKata, AddCorrectOne) {
 	// Arrange
 	char* string = "1";
 	Calculator calc;
@@ -68,7 +68,7 @@ TEST(TDDKata, AddNotCorrectOne) {
 }
 
 // work normal tests
-TEST(TDDKata, AddNotCorrectTwo) {
+TEST(TDDKata, AddCorrectTwo) {
 	// Arrange
 	char* string = "2,2";
 	Calculator calc;
@@ -81,7 +81,7 @@ TEST(TDDKata, AddNotCorrectTwo) {
 }
 
 // work normal test
-TEST(TDDKata, AddNotCorrect3) {
+TEST(TDDKata, AddCorrect3) {
 	// Arrange
 	char* string = "1,2,3";
 	Calculator calc;
@@ -94,7 +94,7 @@ TEST(TDDKata, AddNotCorrect3) {
 }
 
 // work normal test
-TEST(TDDKata, AddNotCorrect4) {
+TEST(TDDKata, AddCorrect4) {
 	// Arrange
 	char* string = "1,2,3,4";
 	Calculator calc;
@@ -105,4 +105,48 @@ TEST(TDDKata, AddNotCorrect4) {
 	ASSERT_EQ(res, (int)10);
 	//		ASSERT_FALSE(true);
 }
+
+
+// correction tests
+
+TEST(TDDKata, AddDelimNL) {
+	// Arrange
+	char* string = "1\n";
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, (int)Calculator::errEnclosedDelim);
+	//		ASSERT_FALSE(true);
+}
+
+// correction tests
+
+TEST(TDDKata, AddDelimNL2) {
+	// Arrange
+	char* string = "1\n2\n";
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, (int)Calculator::errEnclosedDelim);
+	//		ASSERT_FALSE(true);
+}
+
+// work normal test
+
+TEST(TDDKata, AddCorrectDelimNL) {
+	// Arrange
+	char* string = "1\n2\n3";
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, (int)6);
+	//		ASSERT_FALSE(true);
+}
+
 
