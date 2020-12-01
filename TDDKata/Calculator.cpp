@@ -1,21 +1,19 @@
 #include "pch.h"
 #include "Calculator.h"
 
-int Calculator::Add(std::string expression)
-{
-    return 0;
-}
 
 int Calculator::Add(char* expression)
 {
     if (strlen(expression)==0) return errEmpty;
-    char* args[2] = {NULL,NULL};
+
+    char *args[2] = {NULL,NULL};
 
     char* cur_tok = expression;
 
         // parser
 
     int wait_next = 0;
+    
 
     while (1)
     {

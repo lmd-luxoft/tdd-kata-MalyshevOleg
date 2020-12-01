@@ -90,3 +90,30 @@ TEST(TDDKata, AddNotCorrectTwo) {
 	ASSERT_EQ(res, (int)4);
 	//		ASSERT_FALSE(true);
 }
+
+// work normal test
+TEST(TDDKata, AddNotCorrect3) {
+	// Arrange
+	char* string = "1,2,3";
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, (int)6);
+	//		ASSERT_FALSE(true);
+}
+
+// work normal test
+TEST(TDDKata, AddNotCorrect4) {
+	// Arrange
+	char* string = "1,2,3,4";
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, (int)10);
+	//		ASSERT_FALSE(true);
+}
+
