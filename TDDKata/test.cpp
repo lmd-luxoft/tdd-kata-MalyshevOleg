@@ -1,38 +1,38 @@
 #include "pch.h"
 
 // correction test
-TEST(TDDKata, AddEmpyString) {
+TEST_F(TestFixture, AddEmpyString) {
 	// Arrange
 		char * empty = "";
-		Calculator calc;
+	
 		int res;
 	// Act
-		res=calc.Add(empty);
+		res=calc->Add(empty);
 	// ASSERT
 		ASSERT_EQ(res, (int)Calculator::errEmpty);
 	}
 
 // correction tests
-TEST(TDDKata, AddNotDigitArgs) {
+TEST_F(TestFixture, AddNotDigitArgs) {
 		// Arrange
 		char* string = "aaa";
-		Calculator calc;
+	
 		int res;
 		// Act
-		res = calc.Add(string);
+		res = calc->Add(string);
 		// ASSERT
 		ASSERT_EQ(res, (int)Calculator::errNotDigitArgs);
 		//		ASSERT_FALSE(true);
 	}
 
 // correction tests
-TEST(TDDKata, AddIncorrectDelim) {
+TEST_F(TestFixture, AddIncorrectDelim) {
 	// Arrange
 	char* string = "4;2";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)Calculator::errIncorrectDelim);
 	//		ASSERT_FALSE(true);
@@ -40,13 +40,13 @@ TEST(TDDKata, AddIncorrectDelim) {
 
 
 // correction tests
-TEST(TDDKata, AddUnclosedDelim) {
+TEST_F(TestFixture, AddUnclosedDelim) {
 	// Arrange
 	char* string = "4,";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)Calculator::errUnclosedDelim);
 	//		ASSERT_FALSE(true);
@@ -55,52 +55,52 @@ TEST(TDDKata, AddUnclosedDelim) {
 
 // work normal tests
 
-TEST(TDDKata, AddCorrectOne) {
+TEST_F(TestFixture, AddCorrectOne) {
 	// Arrange
 	char* string = "1";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)1);
 	//		ASSERT_FALSE(true);
 }
 
 // work normal tests
-TEST(TDDKata, AddCorrectTwo) {
+TEST_F(TestFixture, AddCorrectTwo) {
 	// Arrange
 	char* string = "2,2";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)4);
 	//		ASSERT_FALSE(true);
 }
 
 // work normal test
-TEST(TDDKata, AddCorrect3) {
+TEST_F(TestFixture, AddCorrect3) {
 	// Arrange
 	char* string = "1,2,3";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)6);
 	//		ASSERT_FALSE(true);
 }
 
 // work normal test
-TEST(TDDKata, AddCorrect4) {
+TEST_F(TestFixture, AddCorrect4) {
 	// Arrange
 	char* string = "1,2,3,4";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)10);
 	//		ASSERT_FALSE(true);
@@ -109,13 +109,13 @@ TEST(TDDKata, AddCorrect4) {
 
 // correction tests
 
-TEST(TDDKata, AddDelimNL) {
+TEST_F(TestFixture, AddDelimNL) {
 	// Arrange
 	char* string = "1\n";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)Calculator::errUnclosedDelim);
 	//		ASSERT_FALSE(true);
@@ -123,13 +123,13 @@ TEST(TDDKata, AddDelimNL) {
 
 // correction tests
 
-TEST(TDDKata, AddDelimNL2) {
+TEST_F(TestFixture, AddDelimNL2) {
 	// Arrange
 	char* string = "1\n2\n";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)Calculator::errUnclosedDelim);
 	//		ASSERT_FALSE(true);
@@ -137,110 +137,110 @@ TEST(TDDKata, AddDelimNL2) {
 
 // work normal test
 
-TEST(TDDKata, AddCorrectDelimNL) {
+TEST_F(TestFixture, AddCorrectDelimNL) {
 	// Arrange
 	char* string = "1\n2\n3";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)6);
 	//		ASSERT_FALSE(true);
 }
 
 // correction tests
-TEST(TDDKata, AddDelimNL3) {
+TEST_F(TestFixture, AddDelimNL3) {
 	// Arrange
 	char* string = "//;\n1-2//|\n3|5,6-7";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)Calculator::errIncorrectDelim);
 }
 
 
 // correction tests
-TEST(TDDKata, AddCorrectSpecitalDelim) {
+TEST_F(TestFixture, AddCorrectSpecitalDelim) {
 	// Arrange
 	char* string = "//need_end";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)Calculator::errIncorrectDelim);
 }
 
 
 // correction tests
-TEST(TDDKata, AddCorrectSpecitalDelim2) {
+TEST_F(TestFixture, AddCorrectSpecitalDelim2) {
 	// Arrange
 	char* string = "//\n";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, (int)Calculator::errIncorrectDelim);
 }
 
 
 // working tests
-TEST(TDDKata, AddDelimNL4) {
+TEST_F(TestFixture, AddDelimNL4) {
 	// Arrange
 	// res= 1+2+3+5+6+7+9 = 33
 	char* string = "//[;]\n1;2//[|]\n3|5,6|7;9";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, 33);
 }
 
 // Correction tests
-TEST(TDDKata, ParseSpecialDelimetersTest1) {
+TEST_F(TestFixture, ParseSpecialDelimetersTest1) {
 	// Arrange
 	// res= 1+2+3+5+6+7+9 = 33
 	char* string = NULL;
-	Calculator calc;
+
 	std::vector<char*> cd;
 	int res;
 	// Act
-	res = calc.ParseSpecialDelimeters(&string,cd);
+	res = calc->ParseSpecialDelimeters(&string,cd);
 	// ASSERT
 	ASSERT_EQ(res, Calculator::errUnclosedDelim);
 	ASSERT_EQ(cd.size(), 0);
 }
 
 // Correction tests
-TEST(TDDKata, ParseSpecialDelimetersTest2) {
+TEST_F(TestFixture, ParseSpecialDelimetersTest2) {
 	// Arrange
 	// res= 1+2+3+5+6+7+9 = 33
 	char* string = "//---";
-	Calculator calc;
+
 	std::vector<char*> cd;
 	int res;
 	// Act
-	res = calc.ParseSpecialDelimeters(&string, cd);
+	res = calc->ParseSpecialDelimeters(&string, cd);
 	// ASSERT
 	ASSERT_EQ(res, Calculator::errIncorrectDelim);
 	ASSERT_EQ(cd.size(), 0);
 }
 
 // Works normal
-TEST(TDDKata, ParseSpecialDelimetersTest3) {
+TEST_F(TestFixture, ParseSpecialDelimetersTest3) {
 	// Arrange
 	// res= 1+2+3+5+6+7+9 = 33
 	char* string = "//[;]\n";
-	Calculator calc;
+
 	std::vector<char*> cd;
 	int res;
 	// Act
-	res = calc.ParseSpecialDelimeters(&string, cd);
+	res = calc->ParseSpecialDelimeters(&string, cd);
 	int res1 = 1;
 	if(cd.size()>0)
 		res1 = strcmp(";", cd[0]);
@@ -252,28 +252,28 @@ TEST(TDDKata, ParseSpecialDelimetersTest3) {
 
 
 // correction tests Non digit arg '-' inside numer
-TEST(TDDKata, AddNegatives) {
+TEST_F(TestFixture, AddNegatives) {
 	// Arrange
 	// res= 1+2+3+5+6+7+9 = 33
 	char* string = "-1-0,-20,-30,5,-4";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, Calculator::errNotDigitArgs);
 }
 
 // Working test
-TEST(TDDKata, AddNegatives2) {
+TEST_F(TestFixture, AddNegatives2) {
 	// Arrange
 	// res= 1+2+3+5+6+7+9 = 33
 	char* string = "-10,-20";
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
-	int res1 = strcmp("Negatives not allowed:-10|-20|", calc.message);
+	res = calc->Add(string);
+	int res1 = strcmp("Negatives not allowed:-10|-20|", calc->message);
 	// ASSERT
 	ASSERT_EQ(res, Calculator::errException);
 	ASSERT_EQ(res1, 0);
@@ -281,80 +281,92 @@ TEST(TDDKata, AddNegatives2) {
 
 
 // Working test 6
-TEST(TDDKata, AddBigger1000) {
+TEST_F(TestFixture, AddBigger1000) {
 	// Arrange
 	char* string = "1001,1003,2,1000,999";
 	// 999+1000+2 == 2001
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, 2001);
 }
 
 // Working test 7
-TEST(TDDKata, AddBiggerDelim) {
+TEST_F(TestFixture, AddBiggerDelim) {
 	// Arrange
 	char* string = "//[***]\n1***2***3";
 	// 6
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, 6);
 }
 
 // Correction test 8
-TEST(TDDKata, AddBiggerDelim2) {
+TEST_F(TestFixture, AddBiggerDelim2) {
 	// Arrange
 	char* string = "//[***][##\n1***2***3";
 	// 6
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, Calculator::errUnclosedDelim);
 }
 
 
 // Working 7
-TEST(TDDKata, AddBiggerDelim3) {
+TEST_F(TestFixture, AddBiggerDelim3) {
 	// Arrange
 	char* string = "//[***][##]\n1***2##3";
 	// 6
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, 6);
 }
 
 // Working 8
-TEST(TDDKata, AddBiggerDelim4) {
+TEST_F(TestFixture, AddBiggerDelim4) {
 	// Arrange
 	char* string = "//[*][%]\n1*2%3";
 	// 6
-	Calculator calc;
+
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, 6);
 }
 
 // Working 9
-TEST(TDDKata, AddBiggerDelim9) {
+TEST_F(TestFixture, AddBiggerDelim9) {
 	// Arrange
 	char* string = "//[****][%%%]\n1****2%%%3";
 	// 6
-	Calculator calc;
 	int res;
 	// Act
-	res = calc.Add(string);
+	res = calc->Add(string);
 	// ASSERT
 	ASSERT_EQ(res, 6);
+}
+
+TEST_F(TestFixture, MyFirstTextFixt1)
+{
+	char* string = "//[****][%%%]\n1****2%%%3";
+	// 6
+	int expect = 6;
+	int res;
+	// Act
+	res = calc->Add(string);
+	// ASSERT
+	ASSERT_EQ(res, 6);
+
 }
