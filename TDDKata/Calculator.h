@@ -25,7 +25,13 @@ public:
 	int ParseSpecialDelimeters(char** cur_token, std::vector<char*> &correct_delims);
 	~ Calculator() {
 		if(message)
-			delete message;
+			delete []message;
+	}
+	void FreeMessages()
+	{
+		
+		delete[]message;
+		message = NULL;
 	}
 };
 

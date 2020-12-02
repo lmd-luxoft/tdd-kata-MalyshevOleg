@@ -1,12 +1,12 @@
 #include "pch.h"
-#include "TextFixture.h"
+#include "TestFixture.h"
 
 
-void TextFixture::SetUp()
+void TestFixture::SetUp()
 {
 		calc = new Calculator();
 }
-void TextFixture::TearDown()
+void TestFixture::TearDown()
 {
 		delete calc;
 }

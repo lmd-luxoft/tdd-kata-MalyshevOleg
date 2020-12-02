@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "TestFixture.h"
 
 // correction test
 TEST_F(TestFixture, AddEmpyString) {
@@ -274,6 +275,7 @@ TEST_F(TestFixture, AddNegatives2) {
 	// Act
 	res = calc->Add(string);
 	int res1 = strcmp("Negatives not allowed:-10|-20|", calc->message);
+	calc->FreeMessages();
 	// ASSERT
 	ASSERT_EQ(res, Calculator::errException);
 	ASSERT_EQ(res1, 0);
