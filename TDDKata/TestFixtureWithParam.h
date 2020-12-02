@@ -1,20 +1,16 @@
 #pragma once
-#include "TextFixture.h"
+#include "pch.h"
+#include "TestFixture.h"
 
 
 struct Param
 {
-    char* param;
-    int result;
-    Param(char* op, int expe) {
-        param = op;
-        result = exp;
-    }
-
+    const char* param;
+    int expected;
+    Param(const char* op, int expe) :param(op), expected(expe) {}
 };
 
-class TestFixtureWithParam :
-    public TestFixture
+class TestFixtureWithParam :   public TestFixture, public ::testing::WithParamInterface<Param>
 {
 
 };

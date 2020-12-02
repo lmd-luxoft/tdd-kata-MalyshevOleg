@@ -36,6 +36,7 @@
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="TestFixture.h" />
+    <ClInclude Include="TestFixtureWithParam.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Calculator.cpp" />
@@ -47,6 +48,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestFixture.cpp" />
+    <ClCompile Include="TestFixtureWithParam.cpp" />
+    <ClCompile Include="test_p.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

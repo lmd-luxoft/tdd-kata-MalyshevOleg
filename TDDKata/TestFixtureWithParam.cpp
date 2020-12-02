@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "TestFixtureWithParam.h"
+#include "TestFixture.h"
+#include <vector>
 
 
-//INSTANTIATE_TEST_CASE_P(Parmetrized, TestFixtureWithParams, ::testing::Values(Param("2,3"), 5), Param("2,4"));
-/*
 std::vector<Param> CreateParametersSet()
 {
 	std::vector<Param> p;
@@ -12,6 +12,7 @@ std::vector<Param> CreateParametersSet()
 	return p;
 }
 
-INSTANTIATE_TEST_CASE_P(ParametrizedTest, TestFixtureWithParam, ::testing::ValuesIn(CreateParametersSet));
+INSTANTIATE_TEST_CASE_P(ParametrizedTest, 
+			TestFixtureWithParam, 
+			::testing::ValuesIn(CreateParametersSet()));
 
-*/

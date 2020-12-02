@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "TestFixture.h"
 
-
 void TestFixture::SetUp()
 {
 		calc = new Calculator();

@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "TestFixture.h"
+#include "TestFixtureWithParam.h"
+
 
 // correction test
 TEST_F(TestFixture, AddEmpyString) {
@@ -14,6 +16,7 @@ TEST_F(TestFixture, AddEmpyString) {
 	}
 
 // correction tests
+
 TEST_F(TestFixture, AddNotDigitArgs) {
 		// Arrange
 		char* string = "aaa";
