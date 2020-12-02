@@ -177,6 +177,7 @@ int Calculator::ParseSpecialDelimeters(char** cur_token, std::vector<char*>& cor
                 (*cur_token)++;
                 is_added++;
                 correct_delims.push_back(tmp_str);
+                new_delim = 0;
                 continue;
             }
         }// end if ((*(*cur_token) == ']') {
@@ -184,6 +185,7 @@ int Calculator::ParseSpecialDelimeters(char** cur_token, std::vector<char*>& cor
         if ((new_delim == NULL) && (in_parse_delim2==1)) new_delim = (*cur_token);
         (*cur_token)++;
     }// end while
+    if (in_parse_delim2) return errUnclosedDelim;
     return (is_added>0)?0:errIncorrectDelim; // All Ok!
 
 }

@@ -305,3 +305,56 @@ TEST(TDDKata, AddBiggerDelim) {
 	// ASSERT
 	ASSERT_EQ(res, 6);
 }
+
+// Correction test 8
+TEST(TDDKata, AddBiggerDelim2) {
+	// Arrange
+	char* string = "//[***][##\n1***2***3";
+	// 6
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, Calculator::errUnclosedDelim);
+}
+
+
+// Working 7
+TEST(TDDKata, AddBiggerDelim3) {
+	// Arrange
+	char* string = "//[***][##]\n1***2##3";
+	// 6
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, 6);
+}
+
+// Working 8
+TEST(TDDKata, AddBiggerDelim4) {
+	// Arrange
+	char* string = "//[*][%]\n1*2%3";
+	// 6
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, 6);
+}
+
+// Working 9
+TEST(TDDKata, AddBiggerDelim9) {
+	// Arrange
+	char* string = "//[****][%%%]\n1****2%%%3";
+	// 6
+	Calculator calc;
+	int res;
+	// Act
+	res = calc.Add(string);
+	// ASSERT
+	ASSERT_EQ(res, 6);
+}
