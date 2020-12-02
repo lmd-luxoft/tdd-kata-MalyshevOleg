@@ -25,8 +25,8 @@ int Calculator::Add(char* expression_orig)
     if ((expression_orig == NULL) ||
        (strlen(expression_orig)==0)) return errEmpty;
 
-    char* expression = new char[strlen(expression_orig) + 1]();
-    strcpy(expression, expression_orig);
+    char* expression = new char[strlen(expression_orig) + 2]();
+    strcpy_s(expression, strlen(expression_orig)+1, expression_orig);
 
     char* cur_tok = expression;
 
@@ -84,10 +84,10 @@ int Calculator::Add(char* expression_orig)
                         if (message == NULL)
                         {
                             message = new char[2048]();
-                            strcpy(message, "Negatives not allowed:");
+                            strcpy_s(message,2047, "Negatives not allowed:");
                         }
-                        strcat(message, element);
-                        strcat(message, "|");
+                        strcat_s(message, 2047, element);
+                        strcat_s(message, 2047, "|");
                     }
                     if (atoi(element)<=1000)
                         res += atoi(element);
@@ -112,7 +112,7 @@ int Calculator::Add(char* expression_orig)
                     if (strstr(cur_tok, element) == cur_tok)
                     {
                         is_ok_delim = 1;
-                        cur_tok_len = strlen(element);
+                        cur_tok_len = (int)strlen(element);
                         break;
                     }
                 }
@@ -129,7 +129,7 @@ int Calculator::Add(char* expression_orig)
                 {
                     delete [] expression;
                     if (args.size() == NULL) return errNotDigitArgs;
-                    else                return errIncorrectDelim;
+                    else                return errNonCorrectDelim;
                 }
             }
         }
@@ -172,8 +172,8 @@ int Calculator::ParseSpecialDelimeters(char** cur_token, std::vector<char*>& cor
             {
                 in_parse_delim2=0;
                 if (new_delim == NULL) return Calculator::errUnclosedDelim;
-                char* tmp_str = new char[((*cur_token) - new_delim) + 1]();
-                strncpy(tmp_str, new_delim, (*cur_token) - new_delim);
+                char* tmp_str = new char[((*cur_token) - new_delim) + 2]();
+                strncpy_s(tmp_str, 1+(*cur_token) - new_delim, new_delim, (*cur_token) - new_delim);
                 (*cur_token)++;
                 is_added++;
                 correct_delims.push_back(tmp_str);
@@ -181,11 +181,11 @@ int Calculator::ParseSpecialDelimeters(char** cur_token, std::vector<char*>& cor
                 continue;
             }
         }// end if ((*(*cur_token) == ']') {
-        if (in_parse_delim2 == 0) return errIncorrectDelim;
+        if (in_parse_delim2 == 0) return errNonCorrectDelim;
         if ((new_delim == NULL) && (in_parse_delim2==1)) new_delim = (*cur_token);
         (*cur_token)++;
     }// end while
     if (in_parse_delim2) return errUnclosedDelim;
-    return (is_added>0)?0:errIncorrectDelim; // All Ok!
+    return (is_added>0)?0:errNonCorrectDelim; // All Ok!
 
 }

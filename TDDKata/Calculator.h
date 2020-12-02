@@ -10,7 +10,7 @@ class Calculator
 
 public:
 	enum {stateNormal=0,stateSpecDelim};
-	enum {errEmpty=-1,errNotDigitArgs=-3,errIncorrectDelim=-4,errUnclosedDelim=-5,errException=-6};
+	enum {errEmpty=-1,errNotDigitArgs=-3,errNonCorrectDelim=-4,errUnclosedDelim=-5,errException=-6};
 
 	char* message=NULL;
 	/// <summary>
